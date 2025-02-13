@@ -34,52 +34,13 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    // creating an object with the properties of our data class and put it as state
-                    var sItems by remember {
-                        mutableStateOf(listOf<ShoppingItem>())
-                    }
-                    // the column holds the Button
-                    Column (
-                        modifier = Modifier.fillMaxSize(),
-                        verticalArrangement = Arrangement.Center
-                    ){
-                        // Button Starts here
-                        Button(onClick = { /*TODO*/ },
-                            modifier = Modifier.align(Alignment.CenterHorizontally)
-                        ) {
-                            Text("Add Item")
+                    ShoppingList()
 
-                        }
-                        // Adding a lazy column
-                        // lazy column or Roe renders only visible items on the screen
-
-                        LazyColumn(
-                            // this pushes the button on the top by default
-                            // because the lazy column even though it is empty will take the whole page
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(16.dp)
-                        ){
-                            items(sItems){
-
-
-                            }
-
-                        }
-
-
-                    }
 
                 }
             }
         }
     }
 }
-// data class helps us to hold the items at one place
-data class ShoppingItem(
-    val id: Int,
-    var name: String,
-    var quantity: Int,
-    var isEditing: Boolean
-)
+
 
