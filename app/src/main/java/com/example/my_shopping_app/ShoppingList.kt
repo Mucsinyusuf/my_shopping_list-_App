@@ -3,10 +3,13 @@ package com.example.my_shopping_app
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -31,13 +34,23 @@ fun ShoppingList(){
     var sItems by remember {
         mutableStateOf(listOf<ShoppingItem>())
     }
+    // Setting app dialog box
+    var showDialog by remember {
+        mutableStateOf(false)
+    }
+    var itemName by remember {
+        mutableStateOf("")
+    }
+    var itemQuantity by remember {
+        mutableStateOf("")
+    }
     // the column holds the Button
     Column (
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center
     ){
         // Button Starts here
-        Button(onClick = { /*TODO*/ },
+        Button(onClick = { showDialog = true },
             modifier = Modifier.align(Alignment.CenterHorizontally)
         ) {
             Text("Add Item")
@@ -60,6 +73,24 @@ fun ShoppingList(){
 
         }
 
+
+    }
+    // we set the alert dialog if show dialog is true and put it off if show dialog is false
+    if (showDialog){
+       AlertDialog(onDismissRequest = { showDialog = false },
+           confirmButton = { /*TODO*/ },
+           title = { Text(text = "Add Shopping Item")},
+           text = {
+               Column {
+                   OutlinedTextField(value = itemName ,
+                       onValueChange = {itemName=it},
+                       singleLine = true,
+                       modifier = Modifier.fillMaxWidth().padding(8.dp)
+                   )
+               }
+
+           }
+       )
 
     }
 }
